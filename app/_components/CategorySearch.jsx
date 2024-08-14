@@ -9,12 +9,14 @@ import GloabApi from "../_utils/GloabApi";
 
 const CategorySearch = () => {
   useEffect(() =>{
-    getCategoryList
+    getCategoryList()
   },[])
   const getCategoryList=() =>{
     GloabApi.getCategory().then(resp =>{
-      console.log(resp)
-      console.log("testing")
+      console.log(resp.data.data)
+      // console.log("testing")
+      // console.log(API_KEY);
+
     })
   }
   return (

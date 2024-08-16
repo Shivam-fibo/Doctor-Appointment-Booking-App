@@ -2,21 +2,21 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import GloabApi from "../_utils/GloabApi";
-
+import Image from 'next/image'
 
 
 const CategorySearch = () => {
+
+  const[categoryList, setCategoryList] = useState([]);
   useEffect(() =>{
     getCategoryList()
   },[])
   const getCategoryList=() =>{
     GloabApi.getCategory().then(resp =>{
       console.log(resp.data.data)
-      // console.log("testing")
-      // console.log(API_KEY);
-
+      setCategoryList(resp.data.data);
     })
   }
   return (
@@ -30,8 +30,24 @@ const CategorySearch = () => {
           <Input type="email" placeholder="Search..." />
           <Button type="submit">< Search className = 'h-4 ml-1'/> Search</Button>
         </div>
-      </div>
+        </div>
+        <div className="flex flex-wrap justify-center gap-4"> 
+  {categoryList.map((item, index) => (
+    <div key={index} className="flex flex-col items-center gap-2 p-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6">
+      <Image 
+        src={item.attributes?.ImageURL?.data[0]?.attributes?.formats?.medium?.url || item.attributes?.ImageURL?.data[0]?.attributes?.url} 
+        alt="icon" 
+        height={40} 
+        width={40} 
+        className="rounded-full"
+      />
+      <label className="text-sm font-semibold">{item.attributes?.Name}</label>
     </div>
+  ))}
+</div>
+
+   
+  </div>
   );
 };
 

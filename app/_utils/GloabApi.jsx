@@ -11,7 +11,7 @@ const axiosCLient = axios.create({
 
 const getCategory = async () => {
   try {
-    const response = await axiosCLient.get('sliders');
+    const response = await axiosCLient.get('sliders?populate=*');
     return response;
   } catch (error) {
     console.error('Error fetching categories:', error);

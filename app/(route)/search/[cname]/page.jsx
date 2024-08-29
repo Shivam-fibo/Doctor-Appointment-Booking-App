@@ -1,11 +1,16 @@
-import React from 'react'
+"use client"
 
-const page = () => {
+import React, { useEffect } from 'react'
+
+const Search = ({params}) => {
+  useEffect(() =>{
+    console.log(params)
+  })
   return (
     <div>
-      Seach page
+     
     </div>
   )
 }
 
-export default page
+export default Search

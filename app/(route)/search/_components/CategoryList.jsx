@@ -22,9 +22,19 @@ import {
     CommandShortcut,
   } from "@/components/ui/command"
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const CategoryList = () => {
     const[categoryList, setCategoryList] = useState([]);
+      const paramas = usePathname();
+      const category = paramas.split('/')[2];
+      useEffect(() =>{
+        getCategoryList();
+        console.log(paramas)
+        console.log(category)
+      },[])
+
+
 
     const getCategoryList=() =>{
       GloabApi.getCategory().then(resp =>{
@@ -37,26 +47,25 @@ const CategoryList = () => {
      
     },[])
   return (
-    <div className="h-screen flex flex-col fixed mt-5">
- <Command className="rounded-lg border shadow-md md:min-w-[450px]">
-      <CommandInput placeholder="Type a command or search..." />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
-          {categoryList && categoryList.map((item, index) =>(
-            <CommandItem key={index} >
-                <Link href={' '} className = 'p-2 flex gap-2 overflow-visible hover:cursor-pointer'>
-               <Image width={25} height={25} src={item.attributes?.ImageURL?.data[0]?.attributes?.url} />
-                <label className="hover:cursor-pointer text-green-200 pl-5">  {item.attributes?.Name}</label>
-                </Link>
+    <div className="h-screen flex fixed flex-col mt-5 overflow-hidden">
+    <Command className="h-full rounded-lg bg-gray-50 border shadow-md md:min-w-[450px] overflow-auto">
+      <CommandInput placeholder="Search..." />
+      <CommandList className = "overflow-visible">
+  
+          {categoryList && categoryList.map((item, index) => (
+            <CommandItem key={index}>
+              <Link href={'/search/' + item.attributes.Name} className='p-2 flex gap-2 items-center hover:cursor-pointer'>
+                <Image width={25} height={25} src={item.attributes?.ImageURL?.data[0]?.attributes?.url} />
+                <label className="hover:cursor-pointer text-black-200 pl-5">{item.attributes?.Name}</label>
+              </Link>
             </CommandItem>
           ))}
-        </CommandGroup>
-        <CommandSeparator />
-      
+
       </CommandList>
     </Command>
-    </div>
+  </div>
+  
+
   )
 }
 

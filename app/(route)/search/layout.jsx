@@ -1,7 +1,7 @@
 import React from 'react'
 import CategoryList from './_components/CategoryList'
 
-const layout = ({children, params}) => {
+const layout = ({children}) => {
   return (
     <div>
     <div className='grid grid-cols-4'>

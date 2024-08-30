@@ -7,9 +7,10 @@ import GloabApi from "../_utils/GloabApi";
 import Image from "next/image";
 import Link from "next/link";
 
+
 const CategorySearch = () => {
   const [categoryList, setCategoryList] = useState([]);
-
+  
   const getCategoryList = () => {
     GloabApi.getCategory().then((resp) => {
       console.log(resp.data.data);

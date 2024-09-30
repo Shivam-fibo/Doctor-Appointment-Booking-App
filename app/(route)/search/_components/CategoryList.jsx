@@ -13,13 +13,12 @@ import {
    
   import {
     Command,
-    CommandEmpty,
-    CommandGroup,
+
+
     CommandInput,
     CommandItem,
     CommandList,
-    CommandSeparator,
-    CommandShortcut,
+ 
   } from "@/components/ui/command"
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -55,7 +54,7 @@ const CategoryList = () => {
           {categoryList && categoryList.map((item, index) => (
             <CommandItem key={index}>
               <Link href={'/search/' + item.attributes.Name} className='p-2 flex gap-2 items-center hover:cursor-pointer'>
-                <Image width={25} height={25} src={item.attributes?.ImageURL?.data[0]?.attributes?.url} />
+                <Image width={25} height={25} alt="image" src={item.attributes?.ImageURL?.data[0]?.attributes?.url} />
                 <label className="hover:cursor-pointer text-black-200 pl-5">{item.attributes?.Name}</label>
               </Link>
             </CommandItem>

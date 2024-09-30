@@ -10,7 +10,10 @@ const axiosClient = axios.create({
 const getCategory =  () => axiosClient.get('/sliders?populate=*');
 
 const getDoctor = () => axiosClient.get('/doctors?populate=*');
+
+const getDoctorByCategory = (category) => axios.get('http://localhost:1337/api/doctors?filters[sliders][Name][$in]='+category+'')
 export default {
   getCategory,
-  getDoctor
+  getDoctor,
+  getDoctorByCategory
 };

@@ -2,19 +2,21 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 
-const DoctorList = ({ doctorList }) => {
+const DoctorList = ({ doctorList, heading = "Popular Doctors"  }) => {
   return (
     <div>
       <div className="mb-10">
-        <h3 className="font-bold text-xl">Popular Doctor</h3>
+        <h3 className="font-bold text-xl">{heading}</h3>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mb-10"> 
         {doctorList.length > 0 ? 
                   doctorList.map((doctor, index) => {
-            const imageUrl =  doctor.attributs?.Image?.data[0]?.attributes?.url;
+            const imageUrl =  doctor.attributes?.Image?.data[0]?.attributes?.url;
             console.log(imageUrl);
             const name = doctor.attributes?.Name;
-            const specialty = doctor.attributes.slider?.data.attributes.Name
+            // const specialty = doctor.attributes.slider?.data.attributes.Name
+            const specialty = doctor.attributes.sliders?.data[0]?.attributes?.Name;
+
             const address = doctor.attributes?.Address
            
             return (
@@ -39,7 +41,7 @@ const DoctorList = ({ doctorList }) => {
             );
           })
           :
-          
+          // <h1>No data found for thi</h1>
              [1,2,3,4,5,6].map((item,index) =>(
                <div className=" h-[220px] bg-slate-600 w-full animate-pulse">
                 

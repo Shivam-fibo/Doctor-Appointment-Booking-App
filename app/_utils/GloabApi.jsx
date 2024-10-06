@@ -11,7 +11,9 @@ const getCategory =  () => axiosClient.get('/sliders?populate=*');
 
 const getDoctor = () => axiosClient.get('/doctors?populate=*');
 
-const getDoctorByCategory = (category) => axios.get('http://localhost:1337/api/doctors?filters[sliders][Name][$in]='+category+'')
+const getDoctorByCategory = (category) => 
+  axiosClient.get(`/doctors?filters[sliders][id][$in]=${category}&populate=*`);
+console.log(getDoctorByCategory);
 export default {
   getCategory,
   getDoctor,
